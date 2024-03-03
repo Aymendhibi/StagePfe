@@ -1,0 +1,10 @@
+<app-header (toggleMenuSidebar)="toggleMenuSidebar()"></app-header>
+
+
+<div class="content-wrapper">
+    <router-outlet />
+</div>
+
+<app-footer class="main-footer"></app-footer>
+<aside class="control-sidebar control-sidebar-dark"></aside>
+<div id="sidebar-overlay" (click)="toggleMenuSidebar()"></div>
