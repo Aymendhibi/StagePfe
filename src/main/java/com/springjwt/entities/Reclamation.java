@@ -17,7 +17,8 @@ public class Reclamation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date datereclamation;
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private TypeDeReclamation typedereclamation;
     private String statut;
     private String description;
     @ManyToOne

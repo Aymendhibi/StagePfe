@@ -16,13 +16,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ReclamationTechnique extends Reclamation {
     private String equipement;
-    private String natureProbleme;
+    @Enumerated(EnumType.STRING)
+    NatureProbleme natureProbleme;
     private String photo;
-    @Enumerated(EnumType.STRING)
-    private TypePiste typePiste;
 
-    @Enumerated(EnumType.STRING)
-    private Salledelavage typelavage;
     @OneToOne
     private BonTravail bonTravail;
 
