@@ -6,4 +6,14 @@ import { Injectable } from '@angular/core';
 export class ProduitService {
 
   constructor() { }
+  ajouterProduit() {
+  }
+  supprimerProduit() {
+  }
+  modifierProduit() {
+  }
+  listerProduit() {
+  }
+
+
 }

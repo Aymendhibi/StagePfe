@@ -2,45 +2,44 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '../../../environment/environment';
-import { User } from '../models/user.model';
+import { User } from './../models/user.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private readonly JWt_TOKEN = 'JWT_TOKEN';
-  private loggedUser?: string;
-  private IsAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  private readonly tokenKey: string = 'my-app-token';
+  isLoggedIn = new BehaviorSubject<boolean>(false);
+  token$ = new BehaviorSubject<string>('');
+  http: HttpClient = inject(HttpClient);
 
-  private http = inject(HttpClient);
-  constructor() { }
+  constructor() {
+    const token = localStorage.getItem(this.tokenKey);
+    this.token$.next(token as string);
+    if (token) {
+      this.isLoggedIn.next(true);
+    }
+   }
+  getToken(): string {
+    return localStorage.getItem(this.tokenKey) as string;
+  }
+  setToken(token: string): void {
+    localStorage.setItem(this.tokenKey, token);
+    this.token$.next(token);
+    this.isLoggedIn.next(true);
+  }
+  removeToken(): void { 
+    localStorage.removeItem(this.tokenKey);
+    this.token$.next('');
+    this.isLoggedIn.next(false);
+  }
 
-  login(user: { username: string; password : string}): Observable<any>{ 
-    return this.http.post(environment.ApiUrl + '/authenticate', user).pipe(
-      tap((response : any) => this.doLoginUser(user.username, response.token)),
+  login(user:User): Observable<User>{
+    return this.http.post(`${environment.ApiUrl}authenticate`, user).pipe(
+      tap((response: any) => {
+        this.setToken(response.jwtToken);
+      })
     );
   }
-  private doLoginUser(username: string, token: any): void {
-    this.loggedUser = username;
-    this.storeJwtToken(token);
-    this.IsAuthenticatedSubject.next(true);
-  }
-    
-  private storeJwtToken(jwt: string): void {
-    localStorage.setItem(this.JWt_TOKEN, jwt);
-  }
 
-  getCurrentUser() { 
-    let token = localStorage.getItem(this.JWt_TOKEN);
-    return this.http.get(environment.getuserApiUrl, { headers: { Authorization: `Bearer ${token}` } });
-  }
-
-  isLoggedIn(): boolean {
-    return this.IsAuthenticatedSubject.value;
-  }
-  
-  logout(): void {
-    localStorage.removeItem(this.JWt_TOKEN);
-    this.IsAuthenticatedSubject.next(false);
-  }
 }

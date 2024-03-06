@@ -24,7 +24,7 @@ export class MainComponent implements OnInit {
     ngOnInit() {
         this.renderer.removeClass(
             document.querySelector('app-root'),
-            'login'
+            'login-page'
         );
     }
 

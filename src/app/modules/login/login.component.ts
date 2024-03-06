@@ -1,37 +1,45 @@
-import { Component,Renderer2, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/guards/auth.service';
 import { Router } from '@angular/router';
-import { PasswordModule } from 'primeng/password';
-import { CommonModule } from '@angular/common';
+import { Token } from '@angular/compiler';
 
 @Component({
-  selector: 'login',
+  selector: 'app-login',
   standalone: true,
-  providers: [
-    FormGroup,
-    FormBuilder
-  ],
-  imports: [PasswordModule,CommonModule,ReactiveFormsModule],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  imports: [ ReactiveFormsModule,CommonModule,FormsModule],
+templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
-export class LoginComponent{
-  loginForm!: FormGroup;
-  isLoggedIn = false;
-  isLoginFailed = false;
-  errorMessage = '';
-
-  _authService = inject(AuthService);
-  _router = inject(Router);
-  constructor(private renderer: Renderer2,) {
+export class LoginComponent implements OnInit {
+  public loginForm! : FormGroup;
+  authService = inject(AuthService)
+  router = inject(Router)
+  errorMessage: any;
+  ngOnInit(): void {
+      this.loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', Validators.required)
+  });
   }
-  
 
-  onSubmit(e:Event): void {
-    e.preventDefault();
-    this._authService.login(this.loginForm.value).subscribe(() => {
-      this._router.navigate(['/']);
-    });
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.value).subscribe(
+        {next: (res: any) => {
+          this.authService.setToken(res.jwtToken);
+          this.authService.token$.next(res.jwtToken);
+          this.authService.isLoggedIn.next(true);
+          this.router.navigate(['/']);
+        },
+        error : (error: any) => { 
+          console.log("Login Failed",error.messages)
+          },
+        complete: ()=>{}
+      },
+      );
+    }
   }
+
 }
