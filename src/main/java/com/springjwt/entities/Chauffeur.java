@@ -31,7 +31,7 @@ public class Chauffeur {
 
 
     @OneToMany(mappedBy = "chauffeur")
-    private List<Commande> commande;
+    private List<Commande> commandes;
 
 
 }
