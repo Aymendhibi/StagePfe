@@ -1,0 +1,16 @@
+package com.springjwt.entities;
+
+public enum TypePiste {
+
+    DISTRIBUTEUR,
+    CITERNE,
+    NICHE_DEPOTAGE,
+    MANOMETRE,
+    ECLAIRAGE,
+    PISTE_DEGRADEE,
+    CONDUITES_FUYARDES,
+    EQUIPEMENTS_DE_SECURITE,
+    COFFRET_TGBT,
+    MARQUISE_ENDOMMAGEE,
+    SIGNALISATION_ENDOMMAGEE,
+}
