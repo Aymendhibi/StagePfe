@@ -3,12 +3,13 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/guards/auth.service';
 import { Router } from '@angular/router';
-import { Token } from '@angular/compiler';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ ReactiveFormsModule,CommonModule,FormsModule],
+  imports: [ ReactiveFormsModule,CommonModule,FormsModule, MatButtonModule],
 templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -34,9 +35,10 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/']);
         },
         error : (error: any) => { 
-          console.log("Login Failed",error.messages)
+          if (error.error.message === 'Incorrect username or password!') {
+        this.loginForm.get('email')?.setErrors({ notRecognized: true });
+      }
           },
-        complete: ()=>{}
       },
       );
     }

@@ -1,21 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from './../../core/guards/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [],
-  templateUrl: './header.component.html',
+templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
- menuValue:boolean=false;
-  menu_icon: string = 'bi bi-list';
-  
- openMenu(){
-    this.menuValue =! this.menuValue ;
-    this.menu_icon = this.menuValue ? 'bi bi-x' : 'bi bi-list';
-  }
-   closeMenu() {
-    this.menuValue = false;
-    this.menu_icon = 'bi bi-list';
-  }
+  authService = inject(AuthService);
+  router = inject(Router)
+  logOut() {
+    this.authService.removeToken();
+    this.router.navigate(['login'])
+ }
 }

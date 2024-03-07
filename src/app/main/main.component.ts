@@ -3,6 +3,7 @@ import { AppService } from '../core/services/app.service';
 import { FooterComponent } from "./footer/footer.component";
 import { HeaderComponent } from "./header/header.component";
 import { RouterOutlet } from '@angular/router';
+import { MenuSidebarComponent } from './menu-sidebar/menu-sidebar.component';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { RouterOutlet } from '@angular/router';
     ],
     templateUrl: './main.component.html',
     styleUrl: './main.component.scss',
-    imports: [RouterOutlet,FooterComponent,HeaderComponent]
+    imports: [RouterOutlet,FooterComponent,HeaderComponent,MenuSidebarComponent]
 })
 export class MainComponent implements OnInit {
     @HostBinding('class') class = 'wrapper';

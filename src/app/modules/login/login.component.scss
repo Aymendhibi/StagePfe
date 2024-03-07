@@ -11,7 +11,7 @@
     justify-content: center;
 
     letter-spacing: 1px;
-    background-color: rgb(185, 238, 10);
+    // background-color: rgb(185, 238, 10);
 }
 
 .login_form_container {
@@ -35,7 +35,7 @@
     width: 170%;
     height: 170%;
     content: '';
-    background-image: conic-gradient(transparent, transparent, transparent, #ee00ff);
+    background-image: conic-gradient(transparent, transparent, transparent, #e4ce06);
     animation: rotate_border 6s linear infinite;
 
 }
@@ -85,7 +85,6 @@ h2 {
     font-size: 15px;
     color: rgba(0, 0, 0, 0.322);
     letter-spacing: 1px;
-
 }
 
 .fa {
@@ -102,6 +101,9 @@ h2 {
     border: 1px solid #eaff00;
     border-radius: 50px;
 
+}
+.logo{
+    text-align: center;
 }
 
 #login_button a {

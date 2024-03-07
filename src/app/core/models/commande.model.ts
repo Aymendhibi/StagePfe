@@ -1,12 +1,9 @@
-import { depot } from "./depot.model";
-import { ligneCommande } from "./ligneCommande.model";
-
-export interface commande {
+export interface Commande {
     id: number;
     dateCommande: Date;
     dateLivraison: Date;
     status: string;
     montant: number;
-    depot: depot;
-    ligneCommandes: ligneCommande[];
+    depotId: number;
+    ligneCommandesId: number;
 }

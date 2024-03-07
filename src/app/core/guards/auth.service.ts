@@ -11,6 +11,10 @@ export class AuthService {
   private readonly tokenKey: string = 'my-app-token';
   isLoggedIn = new BehaviorSubject<boolean>(false);
   token$ = new BehaviorSubject<string>('');
+  public user: Observable<User>;
+  private currentUserSubject: BehaviorSubject<User>;
+
+  // injections
   http: HttpClient = inject(HttpClient);
 
   constructor() {
@@ -19,7 +23,16 @@ export class AuthService {
     if (token) {
       this.isLoggedIn.next(true);
     }
-   }
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user') || ''));
+    this.user = this.currentUserSubject.asObservable();
+  }
+  
+  public isAdmin(){
+    return this.user && this.currentUserSubject.value.role === "ADMIN";
+  }
+  public get currentUserValue(): User {
+    return this.currentUserSubject.value;
+  }
   getToken(): string {
     return localStorage.getItem(this.tokenKey) as string;
   }

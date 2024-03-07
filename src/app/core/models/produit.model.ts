@@ -5,5 +5,5 @@ export interface Produit {
     type: string;
     prix: number;
     stock: number;
-    ligneCommande: ligneCommande;
+    ligneCommandeId: number;
 }

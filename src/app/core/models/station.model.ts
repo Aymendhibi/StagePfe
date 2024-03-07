@@ -1,10 +1,8 @@
-import { reclamation } from "./relclamation.model";
-
-export interface station {
+export interface Station {
     id: number;
     nom: string;
     adresse: string;
     telephone: string;
     email: string;
-    reclamations: reclamation[];
+    reclamationId: number;
 }
