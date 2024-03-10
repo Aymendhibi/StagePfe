@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 public class AuthenticationController {
@@ -58,5 +59,12 @@ public class AuthenticationController {
     public  User modifieruser(@RequestBody User user)
     {
         return  userDetailsService.modifieruser(user);
+    }
+
+    @GetMapping("/afficheruser")
+    public List<User> afficherUser()
+    {
+      List<User> user=  userDetailsService.afficherUser();
+        return user;
     }
 }

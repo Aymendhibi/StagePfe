@@ -30,5 +30,8 @@ public class AuthServiceImpl implements AuthService {
         userDTO.setRole(createdUser.getRole());
         return userDTO;
     }
+
+
+
 }
 

@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -34,5 +35,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public  User modifieruser(User user)
     {
         return  userRepository.save(user);
+    }
+
+    public List<User> afficherUser(){
+      List<User> user=  userRepository.findAll();
+        return user;
     }
 }
