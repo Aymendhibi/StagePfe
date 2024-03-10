@@ -32,13 +32,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
          userRepository.deleteById(userId);
         return null;
     }
+
     public  User modifieruser(User user)
     {
         return  userRepository.save(user);
     }
-
+    //alluser
     public List<User> afficherUser(){
       List<User> user=  userRepository.findAll();
         return user;
+
+
+
+
     }
 }
