@@ -12,6 +12,8 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+
 public class Reclamation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +23,17 @@ public class Reclamation {
     private TypeDeReclamation typedereclamation;
     private String statut;
     private String description;
+    private String motif;
+    private String observation;
+    private String fichierJustificatif;
+    private String equipement;
+    @Enumerated(EnumType.STRING)
+    NatureProbleme natureProbleme;
+    private String photo;
     @ManyToOne
     private Station station;
+
+    @OneToOne
+    private BonTravail bonTravail;
+
 }

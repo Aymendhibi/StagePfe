@@ -21,9 +21,8 @@ public class BonTravail {
     private Date dateCloture;
     private String statut;
     private String description;
+
     @OneToOne(mappedBy="bonTravail")
-    private  ReclamationTechnique reclamationTechnique;
-    @OneToOne(mappedBy="bonTravail")
-    private  ReclamationCommerciale reclamationCommerciale ;
+    private  Reclamation reclamation ;
 
 }
