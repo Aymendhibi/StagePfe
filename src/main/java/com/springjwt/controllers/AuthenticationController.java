@@ -61,6 +61,8 @@ public class AuthenticationController {
         return  userDetailsService.modifieruser(user);
     }
 
+    ///
+
     @GetMapping("/afficheruser")
     public List<User> afficherUser()
     {

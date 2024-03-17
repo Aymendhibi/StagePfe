@@ -37,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     {
         return  userRepository.save(user);
     }
-    //alluser
+    //alluser//////
     public List<User> afficherUser(){
       List<User> user=  userRepository.findAll();
         return user;

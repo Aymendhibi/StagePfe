@@ -1,9 +1,12 @@
 package com.springjwt.controllers;
 
+import com.springjwt.entities.Category;
 import com.springjwt.entities.Produit;
 
 import com.springjwt.service.ServiceProduit;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +24,7 @@ public class ProduitController {
         return  servicproduit.ajouterProduit(produit);
     }
     @PutMapping
-    public  Produit modifiersation(@RequestBody Produit produit)
+    public  Produit modifierproduit(@RequestBody Produit produit)
     {
         return  servicproduit.modifierProduit(produit);
     }
@@ -29,7 +32,7 @@ public class ProduitController {
 
 
     @DeleteMapping("/{produitId}")
-    public Produit supprimerstation(@PathVariable Long produitId)
+    public Produit supprimerproduit(@PathVariable Long produitId)
     {
         servicproduit.supprimerProduit(produitId);
         return null;
@@ -41,5 +44,7 @@ public class ProduitController {
         return servicproduit.afficher();
 
     }
+
+
 
 }
