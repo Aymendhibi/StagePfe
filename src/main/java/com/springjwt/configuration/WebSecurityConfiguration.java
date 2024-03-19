@@ -30,9 +30,14 @@ public class WebSecurityConfiguration{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/authenticate", "/sign-up", "/Station","/{stationId}","/Equipement/{stationId}","/modifieruser","/{nomS}","/{userId}").permitAll()
+                .requestMatchers("/authenticate", "/sign-up", "/Station","/{stationId}","/Equipement/{stationId}","/afficheruser","/modifieruser","/{nomS}","/{userId}","/Produit/{produitId}","/Commande/{commandeId}","/Commande/prix/{nomE}",  "/Commande/modifierQuantiteEtCalculerPrixTotal/{ligneCommandeId}/{nouvelleQuantite}" , "/Commande/ajouterProduitAuPanier/{produitId}/{quantite}","/Commande/enregistrerCommande/{commandeId}","/Produit/cat/{category}","/Produit/prix/{nomE}","/Produit/prixU/{nomE}").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/api/**","/Station/**","/{stationId}","/Equipement/**","/Produit/**","/Depot/**")
+                .authorizeHttpRequests().requestMatchers("/api/**","/Station/**","/{stationId}","/Equipement/**"
+                        ,"/Produit/{produitId}","/Depot/**","/Commande/**","/Commande//{commandeId}","/Produit/{produitId}",
+                        "/Commande/valider","/Commande/prix/{nomE}",
+                        "/Commande/modifierQuantiteEtCalculerPrixTotal/{ligneCommandeId}/{nouvelleQuantite}" ,
+                        "/Commande/ajouterProduitAuPanier/{produitId}/{quantite}","/Commande/enregistrerCommande/{commandeId}","/Produit/**","/Produit/prix/{nomE}","/Produit/prixU/{nomE}"
+                        ,"/Produit/cat/{category}","/Produit/categories","/Reclamation/** ","/Chauffeur/**","/Chauffeur/{chauffeurId}")
                 .authenticated().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
