@@ -30,10 +30,13 @@ public class WebSecurityConfiguration{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/authenticate", "/sign-up", "/Station","/{stationId}","/Equipement/{stationId}","/afficheruser","/modifieruser","/{nomS}","/{userId}","/Produit/{produitId}","/Commande/{commandeId}","/Commande/prix/{nomE}",  "/Commande/modifierQuantiteEtCalculerPrixTotal/{ligneCommandeId}/{nouvelleQuantite}" , "/Commande/ajouterProduitAuPanier/{produitId}/{quantite}","/Commande/enregistrerCommande/{commandeId}","/Produit/cat/{category}","/Produit/prix/{nomE}","/Produit/prixU/{nomE}").permitAll()
+                .requestMatchers("/authenticate", "/sign-up", "/Station","/{stationId}","/Equipement/{stationId}","/afficheruser","/modifieruser","/{nomS}","/{userId}","/Produit/{produitId}","/Commande/{commandeId}","/Commande/prix/{nomE}",
+                        "/Commande/modifierQuantiteEtCalculerPrixTotal/{ligneCommandeId}/{nouvelleQuantite}"
+                        , "/Commande/ajouterProduitAuPanier/{produitId}/{quantite}","/Commande/enregistrerCommande/{commandeId}","/Station/{stationId}"
+                        ,"/Produit/cat/{category}","/Produit/prix/{nomE}","/Produit/prixU/{nomE}").permitAll()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/api/**","/Station/**","/{stationId}","/Equipement/**","/modifieruser"
-                        ,"/Produit/{produitId}","/Depot/**","/Commande/**","/Commande//{commandeId}","/Produit/{produitId}",
+                        ,"/Produit/{produitId}","/Depot/**","/Commande/**","/Commande//{commandeId}","/Produit/{produitId}","/Station/{stationId}",
                         "/Commande/valider","/Commande/prix/{nomE}",
                         "/Commande/modifierQuantiteEtCalculerPrixTotal/{ligneCommandeId}/{nouvelleQuantite}" ,
                         "/Commande/ajouterProduitAuPanier/{produitId}/{quantite}","/Commande/enregistrerCommande/{commandeId}","/Produit/**","/Produit/prix/{nomE}","/Produit/prixU/{nomE}","/modifieruser"
