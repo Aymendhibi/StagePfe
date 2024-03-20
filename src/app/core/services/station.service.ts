@@ -10,12 +10,11 @@ import { environment } from '../../../environment/environment';
 })
 export class StationService {
   formStation=this.fb.group({
-    id: [0],
+    id: 0,
     nom: [""],
     adresse: [""],
     telephone: [""],
     email: [""],
-    reclamationId: [0]
   });
   listStation: Station[] = [];
   
@@ -27,7 +26,6 @@ export class StationService {
       adresse: station.adresse,
       telephone: station.telephone,
       email: station.email,
-      reclamationId: station.reclamationId
     })
   }
   initializeFormForPost() {
@@ -37,34 +35,37 @@ export class StationService {
       adresse: '',
       telephone: '',
       email: '',
-      reclamationId: 0
     })
   }
   listerStation() {
-    return this.http.get(environment.stationApiUrl + "/GetList");
+    return this.http.get(environment.stationApiUrl );
   }
   ajouterStation() {
     return this.http
       .post(
-        environment.stationApiUrl + "/Post" ,this.formStation.value,
+        environment.stationApiUrl ,this.formStation.value,
       );
   }
-  supprimerStation() {
+  supprimerStation(id:number) {
     return this.http.delete(
-      `${environment.stationApiUrl + "/Delete" }${this.formStation.value.id}`,
+      `${environment.stationApiUrl}/${id}`,
       { responseType: "text" }
     );
   }
   affecterReclamationToStation(reclamation: reclamation, id: number) {
     return this.http
       .put(
-        `${environment.stationApiUrl + "/AffecterReclamation" }${id}`, reclamation,
+        `${environment.stationApiUrl}${id}`, reclamation,
       );
   }
   modifierStation() {
     return this.http.put(
-      environment.stationApiUrl + "/Put", this.formStation.value
+      environment.stationApiUrl, this.formStation.value
     );
   }
-  
+  refreshList() {
+    this.http.get(environment.stationApiUrl)
+      .toPromise()
+      .then(res =>this.listStation = res as Station[]);
+  }
 }

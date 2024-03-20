@@ -23,7 +23,7 @@ export class AuthService {
     if (token) {
       this.isLoggedIn.next(true);
     }
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user') || ''));
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user') as string));
     this.user = this.currentUserSubject.asObservable();
   }
   

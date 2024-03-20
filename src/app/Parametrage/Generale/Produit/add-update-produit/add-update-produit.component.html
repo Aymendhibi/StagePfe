@@ -1,0 +1,32 @@
+<div class="dialog-container">
+    <h1 class="title" mat-dialog-title>{{inputData.title}} Produit</h1>
+    <form [formGroup]="_produitService.formProduit">
+        <div mat-dialog-content>
+            <mat-form-field appearance="fill">
+                <mat-label>Nom</mat-label>
+                <input formControlName="nom"
+                    [class.is-invalid]="_produitService.formProduit.controls.nom.errors?.['required']" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Type</mat-label>
+                <input formControlName="type"
+                    [class.is-invalid]="_produitService.formProduit.controls.type.errors?.['required']" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Prix</mat-label>
+                <input formControlName="prix"
+                    [class.is-invalid]="_produitService.formProduit.controls.prix.errors?.['required']" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Stock</mat-label>
+                <input formControlName="stock"
+                    [class.is-invalid]="_produitService.formProduit.controls.stock.errors?.['required']" matInput>
+            </mat-form-field>
+        </div>
+        <div class="btn-container" mat-dialog-actions>
+            <button mat-raised-button (click)="onSubmit()" mat-dialog-close color="primary"
+                [disabled]="_produitService.formProduit.invalid">Valider</button>
+            <button (click)="closePopup()" mat-raised-button color="warn">Fermer</button>
+        </div>
+    </form>
+</div>

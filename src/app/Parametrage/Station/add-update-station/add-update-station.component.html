@@ -1,0 +1,32 @@
+<div class="dialog-container">
+    <h1 class="title" mat-dialog-title>{{inputData.title}} Station</h1>
+    <form [formGroup]="_stationService.formStation">
+        <div mat-dialog-content>
+            <mat-form-field appearance="fill">
+                <mat-label>Nom</mat-label>
+                <input formControlName="nom"
+                    [class.is-invalid]="_stationService.formStation.controls.nom.errors?.['required']" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" type="email"
+                    [class.is-invalid]="_stationService.formStation.controls.email.errors?.['required']" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>adresse</mat-label>
+                <input formControlName="adresse"
+                    [class.is-invalid]="_stationService.formStation.controls.adresse.errors?.['required']" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>telephone</mat-label>
+                <input formControlName="telephone"
+                    [class.is-invalid]="_stationService.formStation.controls.telephone.errors?.['required']" matInput>
+            </mat-form-field>
+        </div>
+        <div class="btn-container" mat-dialog-actions>
+            <button mat-raised-button color="primary" (click)="onSubmit()" mat-dialog-close
+                [disabled]="_stationService.formStation.invalid">Valider</button>
+            <button (click)="closePopup()" mat-raised-button color="warn">Fermer</button>
+        </div>
+    </form>
+</div>

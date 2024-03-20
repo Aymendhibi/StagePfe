@@ -4,5 +4,4 @@ export interface Station {
     adresse: string;
     telephone: string;
     email: string;
-    reclamationId: number;
 }

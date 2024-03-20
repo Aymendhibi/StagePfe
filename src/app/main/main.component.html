@@ -1,10 +1,8 @@
-<app-header (toggleMenuSidebar)="toggleMenuSidebar()"></app-header>
-<app-menu-sidebar class="main-sidebar sidebar-dark-primary elevation-4"></app-menu-sidebar>
+<app-menu-sidebar (onToggleSidenav)="onToggleSidenav($event)"></app-menu-sidebar>
+<app-header [collapsed]="collapsed" [screenWidth]="screenWidth"></app-header>
+<div class="body" [ngClass]='getBodyClass()'>
 
-<div class="content-wrapper">
-    <router-outlet></router-outlet>
+    <div class="content-wrapper">
+        <router-outlet></router-outlet>
+    </div>
 </div>
-
-<aside class="control-sidebar control-sidebar-dark"></aside>
-<div id="sidebar-overlay" (click)="toggleMenuSidebar()"></div>
-<app-footer class="main-footer"></app-footer>

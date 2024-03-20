@@ -1,9 +1,12 @@
-import {Component, HostBinding, OnInit, Renderer2} from '@angular/core';
+import {Component, Input, OnInit, Renderer2} from '@angular/core';
 import { AppService } from '../core/services/app.service';
-import { FooterComponent } from "./footer/footer.component";
 import { HeaderComponent } from "./header/header.component";
 import { RouterOutlet } from '@angular/router';
-import { MenuSidebarComponent } from './menu-sidebar/menu-sidebar.component';
+import { MenuSidebarComponent, SidenavToggle } from './menu-sidebar/menu-sidebar.component';
+import { CommonModule } from '@angular/common';
+
+
+
 
 
 @Component({
@@ -14,13 +17,14 @@ import { MenuSidebarComponent } from './menu-sidebar/menu-sidebar.component';
     ],
     templateUrl: './main.component.html',
     styleUrl: './main.component.scss',
-    imports: [RouterOutlet,FooterComponent,HeaderComponent,MenuSidebarComponent]
+    imports: [RouterOutlet,HeaderComponent,MenuSidebarComponent,CommonModule]
 })
 export class MainComponent implements OnInit {
-    @HostBinding('class') class = 'wrapper';
-    public sidebarMenuOpened = true;
 
-    constructor(private renderer: Renderer2) {}
+
+    constructor(private renderer: Renderer2) { }
+    @Input() collapsed = false;
+    @Input() screenWidth = 0;
 
     ngOnInit() {
         this.renderer.removeClass(
@@ -29,27 +33,18 @@ export class MainComponent implements OnInit {
         );
     }
 
-    toggleMenuSidebar() {
-        if (this.sidebarMenuOpened) {
-            this.renderer.removeClass(
-                document.querySelector('app-root'),
-                'sidebar-open'
-            );
-            this.renderer.addClass(
-                document.querySelector('app-root'),
-                'sidebar-collapse'
-            );
-            this.sidebarMenuOpened = false;
-        } else {
-            this.renderer.removeClass(
-                document.querySelector('app-root'),
-                'sidebar-collapse'
-            );
-            this.renderer.addClass(
-                document.querySelector('app-root'),
-                'sidebar-open'
-            );
-            this.sidebarMenuOpened = true;
+    onToggleSidenav(data:SidenavToggle) {
+        this.screenWidth = data.screenWidth;
+        this.collapsed = data.collapsed;
+    }
+    getBodyClass(): string {
+        let styleClass = '';
+        if (this.collapsed && this.screenWidth > 768) {
+            styleClass='body-trimmed'
         }
+        else if(this.collapsed && this.screenWidth <= 768 && this.screenWidth >0) {
+            styleClass = 'body-md-screen'
+        }
+        return styleClass;
     }
 }

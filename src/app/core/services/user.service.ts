@@ -9,64 +9,64 @@ import { environment } from '../../../environment/environment';
 })
 export class UserService {
 
-  formuser=this.fb.group({
-    id:[0],
-    nom : ["" , Validators.required],
+  formUser = this.fb.group({
+    id : [0,Validators.required],
+    name : ["" , Validators.required],
     email:["" , Validators.required],
     password :["" , Validators.required],
-    role:["" , Validators.required]
+    role:[""]
   });
 
-  listuser: User[] = [];
+  listUser: User[] = [];
   
   constructor(private http:HttpClient, private fb:FormBuilder) { }
   initializeFormForEdit(user: User) {
-    this.formuser.setValue({
-      id: user.id,
-      nom : user.nom,
-      email:user.email,
-      password :user.password,
+    this.formUser.patchValue({
+      id : user.id,
+      name : user.name,
+      email : user.email,
+      password :'',
       role : user.role
     });
   }
   
   initializeFormForPost() {
-    this.formuser.setValue({
-      id: 0,
-      nom : '',
+    this.formUser.setValue({
+      id : 0,
+      name : '',
       email:'',
       password :'',
       role : ''
     });
   }
-  getuser() {
-    return this.http.get(environment.userApiUrl + "/GetList");
+  listerUser() {
+    return this.http.get(environment.userApiUrl + "afficheruser");
   }
-  Deleteuser(id:string) {
+  supprimerUser(id:number) {
     return this.http
-      .delete(`${environment.userApiUrl + "/Delete" }${id}`,
+      .delete(`${environment.userApiUrl}${id}`,
       { responseType: "text" }
       );
   }
-  putuser() {
+  modifierUser() {
     return this.http
       .put(
-        environment.userApiUrl + "/Put" ,this.formuser.value,
+        environment.userApiUrl + "modifieruser" ,this.formUser.value,
         
       );
   }
-  insertuser() {
+  ajouterUser() {
     return this.http
       .post(
-        environment.userApiUrl + "/Post",
-        this.formuser.value,
+        environment.userApiUrl + "sign-up",
+        this.formUser.value,
        
       );
   }
 
   refreshList() {
-    this.http.get(environment.userApiUrl+'/GetList')
+    this.http.get(environment.userApiUrl+'afficheruser')
       .toPromise()
-      .then(res =>this.listuser = res as User[]);
+      .then(res =>this.listUser = res as User[]);
   }
 }

@@ -4,6 +4,7 @@
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
 
+
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
@@ -35,5 +36,22 @@ $Agil_front-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { position: relative; font-family: Roboto, "Helvetica Neue", sans-serif; background: #f4f7fa;}
+
+// variable declaration
+$ng-select-dark-bg-color: #676d7d;
+$ng-select-dropdown-bg-color: #676d7d;
+$ng-select-dark-muted-color: #676d7d;
+$ng-select-dark-border-color: #3b4253;
+$ng-select-dark-color: #b4b7bd;
+$ng-select-dark-input-bg-color: #676d7d;
+
+/* Importing Bootstrap SCSS file. */
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import '../node_modules/@angular/cdk/overlay-prebuilt.css';

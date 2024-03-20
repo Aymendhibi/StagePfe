@@ -1,34 +1,29 @@
-<!-- Brand Logo -->
-<a [routerLink]="['/']" class="brand-link">
-    <img src="assets/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-        style="opacity: 0.8" />
-    <span class="brand-text font-weight-light">Métrologie</span>
-</a>
-
-<!-- Sidebar -->
-<div class="sidebar">
-    <!-- Sidebar user (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-            <img [src]="user.picture || 'assets/img/default-profile.png'" class="img-circle elevation-2"
-                alt="User Image" />
-        </div>
-        <div class="info">
-            <a [routerLink]="['/profile']" class="d-block">
-                {{ user.email }}
-            </a>
-            <p class="d-block" style="color: wheat;">Rôle : {{user.role}}</p>
-        </div>
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+    <div class="logo-container">
+        <img class="logo" src="../../../assets/Images/agil.png" alt="AdminLTE Logo" (click)="toggleCollapsed()" />
+        <div class="logo-text" *ngIf="collapsed">AGIL</div>
+        <button class="btn-close" (click)="closeSidenav()" *ngIf="collapsed">
+            <i class="fal fa-times close-icon"></i>
+        </button>
     </div>
 
-    <!-- Sidebar Menu -->
-    <nav class="mt-2" style="overflow-y: hidden">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <div>
-                <app-menu-items *ngFor="let item of menu" [menuItem]="item"
-                    [enabled]="item.role?.includes(this.auth.currentUserValue.role) || item.role == undefined"></app-menu-items>
+    <ul class="sidenav-nav">
+        <li class="sidenav-nav-item" *ngFor="let item of menu">
+            <a class="sidenav-nav-link" (click)="handleClick(item)" *ngIf="item.children && item.children.length > 0">
+                <i class="sidenav-link-icon" [class]="item.icon"></i>
+                <span class="sidenav-link-text" *ngIf="collapsed">{{item.name}}</span>
+                <i *ngIf="item.children && collapsed" class="menu-collapse-icon"
+                    [ngClass]="!item.expanded ? 'fal fa-angle-right' :'fal fa-angle-down'"></i>
+            </a>
+            <a class="sidenav-nav-link" *ngIf="!item.children || (item.children && item.children.length === 0)"
+                [routerLink]="item.path" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}">
+                <i class="sidenav-link-icon" [class]="item.icon"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{item.name}}</span>
+            </a>
+            <div *ngIf="collapsed && item.children && item.children.length > 0">
+                <app-sublevel-menu [menu]="item" [collapsed]="collapsed" [multiple]="multiple"
+                    [expanded]="item.expanded"></app-sublevel-menu>
             </div>
-
-        </ul>
-    </nav>
+        </li>
+    </ul>
 </div>

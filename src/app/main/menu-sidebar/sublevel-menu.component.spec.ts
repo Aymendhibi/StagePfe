@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FooterComponent } from './footer.component';
+import { SublevelMenuComponent } from './sublevel-menu.component';
 
-describe('FooterComponent', () => {
-  let component: FooterComponent;
-  let fixture: ComponentFixture<FooterComponent>;
+describe('SublevelMenuComponent', () => {
+  let component: SublevelMenuComponent;
+  let fixture: ComponentFixture<SublevelMenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FooterComponent]
+      imports: [SublevelMenuComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(FooterComponent);
+    fixture = TestBed.createComponent(SublevelMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

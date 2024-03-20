@@ -1,0 +1,34 @@
+<div class="dialog-container">
+    <h1 class="title" mat-dialog-title>{{inputData.title}} User</h1>
+    <form [formGroup]="_userService.formUser">
+        <div mat-dialog-content>
+            <mat-form-field appearance="fill">
+                <mat-label>Nom</mat-label>
+                <input formControlName="name"
+                    [class.is-invalid]="_userService.formUser.controls.name.errors?.['required']" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" type="email"
+                    [class.is-invalid]="_userService.formUser.controls.email.errors?.['required']" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" type="password"
+                    [class.is-invalid]="_userService.formUser.controls.password.errors?.['required']" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Role</mat-label>
+                <mat-select formControlName="role">
+                    <mat-option ngDefaultControl *ngFor="let role of roles" [value]="role.value">
+                        {{role.viewValue}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="btn-container" mat-dialog-actions>
+            <button mat-raised-button color="primary" (click)="onSubmit()" mat-dialog-close
+                [disabled]="_userService.formUser.invalid">Valider</button>
+            <button (click)="closePopup()" mat-raised-button color="warn">Fermer</button>
+        </div>
+    </form>
+</div>
