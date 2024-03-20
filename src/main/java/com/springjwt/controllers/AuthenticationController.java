@@ -2,11 +2,16 @@ package com.springjwt.controllers;
 
 import com.springjwt.dto.AuthenticationDTO;
 import com.springjwt.dto.AuthenticationResponse;
+import com.springjwt.dto.SignupDTO;
+import com.springjwt.dto.UserDTO;
 import com.springjwt.entities.User;
+import com.springjwt.services.auth.AuthService;
 import com.springjwt.services.jwt.UserDetailsServiceImpl;
 import com.springjwt.util.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -21,6 +26,9 @@ import java.util.List;
 @RestController
 public class AuthenticationController {
 
+
+    @Autowired
+    private AuthService authService;
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -56,11 +64,14 @@ public class AuthenticationController {
     }
 
     @PutMapping("/modifieruser")
-    public  User modifieruser(@RequestBody User user)
-    {
-        return  userDetailsService.modifieruser(user);
-    }
 
+    public ResponseEntity<?> modifieruser(@RequestBody SignupDTO signupDTO) {
+        UserDTO createdUser = authService.createUser(signupDTO);
+        if (createdUser == null){
+            return new ResponseEntity<>("User not created, come again later!", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+    }
     ///
 
     @GetMapping("/afficheruser")

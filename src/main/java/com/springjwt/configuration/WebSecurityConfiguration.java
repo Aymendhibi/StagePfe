@@ -32,11 +32,11 @@ public class WebSecurityConfiguration{
                 .authorizeHttpRequests()
                 .requestMatchers("/authenticate", "/sign-up", "/Station","/{stationId}","/Equipement/{stationId}","/afficheruser","/modifieruser","/{nomS}","/{userId}","/Produit/{produitId}","/Commande/{commandeId}","/Commande/prix/{nomE}",  "/Commande/modifierQuantiteEtCalculerPrixTotal/{ligneCommandeId}/{nouvelleQuantite}" , "/Commande/ajouterProduitAuPanier/{produitId}/{quantite}","/Commande/enregistrerCommande/{commandeId}","/Produit/cat/{category}","/Produit/prix/{nomE}","/Produit/prixU/{nomE}").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/api/**","/Station/**","/{stationId}","/Equipement/**"
+                .authorizeHttpRequests().requestMatchers("/api/**","/Station/**","/{stationId}","/Equipement/**","/modifieruser"
                         ,"/Produit/{produitId}","/Depot/**","/Commande/**","/Commande//{commandeId}","/Produit/{produitId}",
                         "/Commande/valider","/Commande/prix/{nomE}",
                         "/Commande/modifierQuantiteEtCalculerPrixTotal/{ligneCommandeId}/{nouvelleQuantite}" ,
-                        "/Commande/ajouterProduitAuPanier/{produitId}/{quantite}","/Commande/enregistrerCommande/{commandeId}","/Produit/**","/Produit/prix/{nomE}","/Produit/prixU/{nomE}"
+                        "/Commande/ajouterProduitAuPanier/{produitId}/{quantite}","/Commande/enregistrerCommande/{commandeId}","/Produit/**","/Produit/prix/{nomE}","/Produit/prixU/{nomE}","/modifieruser"
                         ,"/Produit/cat/{category}","/Produit/categories","/Reclamation/** ","/Chauffeur/**","/Chauffeur/{chauffeurId}")
                 .authenticated().and()
                 .sessionManagement()
