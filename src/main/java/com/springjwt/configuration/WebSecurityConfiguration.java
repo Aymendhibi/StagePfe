@@ -30,7 +30,7 @@ public class WebSecurityConfiguration{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/authenticate", "/sign-up", "/Station","/{stationId}","/Equipement/{stationId}","/afficheruser","/modifieruser","/{nomS}","/{userId}","/Produit/{produitId}",
+                .requestMatchers("/authenticate", "/sign-up", "/Station","/{stationId}","/Equipement/{stationId}","/Equipement/{equipementId}","/afficheruser","/modifieruser","/{nomS}","/{userId}","/Produit/{produitId}",
                         "/Commande/{commandeId}","/Commande/prix/{nomE}","/Depot/{depotId}",
                         "/Commande/modifierQuantiteEtCalculerPrixTotal/{ligneCommandeId}/{nouvelleQuantite}"
                         , "/Commande/ajouterProduitAuPanier/{produitId}/{quantite}","/Commande/enregistrerCommande/{commandeId}","/Station/{stationId}"

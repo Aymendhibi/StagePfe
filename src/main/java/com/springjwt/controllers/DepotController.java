@@ -19,12 +19,12 @@ public class DepotController {
 
 
     @PostMapping
-    public Depot ajouterProduit(@RequestBody Depot  depot )
+    public Depot ajouterdepot(@RequestBody Depot  depot )
     {
         return  serviceDepot.ajouterDepot(depot);
     }
     @PutMapping
-    public  Depot modifiersation(@RequestBody Depot  depot)
+    public  Depot modifierdepot(@RequestBody Depot  depot)
     {
         return  serviceDepot.modifierDepot(depot);
     }
@@ -32,7 +32,7 @@ public class DepotController {
 
 
     @DeleteMapping("/{depotId}")
-    public Depot supprimerstation(@PathVariable Long depotId)
+    public Depot supprimerdepot(@PathVariable Long depotId)
     {
         serviceDepot.supprimerDepot(depotId);
         return null;

@@ -30,7 +30,7 @@ public Equipement ajouterstationetequipement(@RequestBody Equipement equipement 
     }
 
     @DeleteMapping("/{equipementId}")
-    public Equipement supprimerstation(@PathVariable Long equipementId)
+    public Equipement supprimerEquipement(@PathVariable Long equipementId)
     {
         serviceEquipement.supprimerEquipement(equipementId);
         return null;
