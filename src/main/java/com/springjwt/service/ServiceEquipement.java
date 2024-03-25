@@ -19,14 +19,12 @@ public class ServiceEquipement implements IserviceEquipement {
     @Autowired
     StationRepository stationRepository;
 
-    @Override
-    public Equipement ajouterStationetEquipement(Equipement equipement, Long stationId) {
-        Station station=stationRepository.findById(stationId).get();
-        equipement.setStation(station);
-         equipementRepository.save(equipement);
-        return equipement;
-    }
 
+
+    public Equipement ajouterequipement(Equipement equipement)
+    {
+        return equipementRepository.save(equipement);
+    }
     @Override
     public Equipement modifierEquipement(Equipement equipement) {
 

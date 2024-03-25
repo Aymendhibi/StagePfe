@@ -18,9 +18,9 @@ public class EquipementController {
 
 
 
-@PostMapping("/{stationId}")
-public Equipement ajouterstationetequipement(@RequestBody Equipement equipement , @PathVariable Long stationId) {
-    return serviceEquipement.ajouterStationetEquipement(equipement,stationId);
+@PostMapping
+public Equipement ajouterequipement(@RequestBody Equipement equipement ) {
+    return serviceEquipement.ajouterequipement(equipement);
 
 }
     @PutMapping
